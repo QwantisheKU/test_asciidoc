@@ -11,17 +11,13 @@ email <.>
 |====
 |Имя |Почта
 |Jack |Jones
-
-
 |====
 
-image::red.svg[]
-
+image::./red.svg[]
 
 .ff
 [plantuml, puml, svg, width="20%", align="center"]
 ....
-
 @startuml
 a --> b: ffdfffff
 a <-- b: [[https://wikipedia.com wiki]]
