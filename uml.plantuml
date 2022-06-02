@@ -1,0 +1,46 @@
+	
+@startuml red
+actor user as "Пользователь"
+participant "Сравни.ру" as sravni
+participant "RED API" as red
+== Покупка кросс-сейла "Страхование квартиры" ==
+
+user -> sravni: Купить ОСАГО и \nпопасть на THNX Page
+activate sravni
+sravni -> red: <<POST /cross-selling>>
+activate red
+red --> sravni: crossOrderId
+group #LightGreen 1-й вариант
+    sravni -> red: <<GET /cross-selling/{id}>>
+    red --> sravni: paymentUrl и данные \nпо кросс-сейлу
+else #LightCoral 2-й вариант
+    sravni -> red: <<GET /cross-selling/\n{originalEntityId}/{originalEntityType}>>
+    red --> sravni: paymentUrl и данные \nпо кросс-сейлу
+end
+deactivate red
+
+sravni --> user: Отобразить кросс-сейл
+user -> sravni: Выбрать кросс-сейл
+sravni --> user: Отобразить карточку
+sravni --> user: Загрузить платежную ссылку
+user -> sravni: Оплатить кросс-сейл
+
+sravni -> red: <<Проверить оплату>>
+activate red
+
+group На стороне RED
+red -> red: Проверка оплаты
+activate red
+deactivate red
+red -> red: Загрузить THNX Page
+activate red
+deactivate red
+end
+
+red --> sravni: redirectUrl
+
+deactivate red
+sravni --> user: Отобразить THNX Page + \nотправить полис и смс
+deactivate sravni
+
+@enduml

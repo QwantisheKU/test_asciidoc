@@ -1,0 +1,41 @@
+@startuml c4_test
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+SHOW_PERSON_OUTLINE()
+AddRelTag("throughGateway", $lineStyle = DashedLine(), )
+
+Person(user, "Пользователь", "Клиент сервиса")
+Person_Ext(agent, "Агент", "Поставщик \nпользователей")
+
+System_Ext(dadata, "Dadata", "Система унификации адресов")
+System(agents_cabinet, "Агентский кабинет", "Система для работы с агентами")
+System_Ext(partners_service, "Сервис партнеров", "Система партнера")
+System_Ext(insurance_service, "Сервис СК", "Система страховой компании")
+System_Ext(rsa, "Сервис РСА", "Российский союз автостраховщиков")
+
+System_Boundary(c1, "Сравни.ру ОСАГО") {
+    Container(sravni_api, "API", "2","Web-сервис для агрегации полисов ОСАГО разных СК")
+    Container(sravni_mobile, "Мобильное приложение", "2","Web-сервис для агрегации полисов ОСАГО разных СК")
+    Container(sravni_desktop, "Сайт", "2","Web-сервис для агрегации полисов ОСАГО разных СК")
+    Container(sravni_server, "WEB-сервер", "2","Web-сервис для агрегации полисов ОСАГО разных СК")
+    
+}
+
+Rel(sravni_api, dadata, "Сырые данные", "http")
+Rel(dadata, sravni_api, "Унифицированные данные", "http")
+Rel(sravni_server, sravni_desktop, "Покупает полис(-ы)", "browser")
+Rel(sravni_desktop, sravni_api, "Покупает полис(-ы)", "browser")
+Rel(sravni_mobile, sravni_api, "Покупает полис(-ы)", "browser")
+Rel(user, sravni_desktop, "Покупает полис(-ы)", "browser")
+Rel(user, sravni_mobile, "Покупает полис(-ы)", "mobile")
+Rel(agent, agents_cabinet, "Привлекает пользователей", "browser")
+'Rel_R(sravni, dadata, "Сырой адрес", "http")
+'Rel_R(dadata, sravni, "Унифицированный адрес", "http")
+Rel(agents_cabinet, sravni_api, "Данные пользователя", "http through OsagoGateway")
+Rel(partners_service, sravni_api, "Данные пользователя", "http")
+Rel(sravni_api, insurance_service, "Данные пользователя", "http", $tags="throughGateway")
+Rel(insurance_service, sravni_api, "Полис ОСАГО", "http", $tags="throughGateway")
+Rel(insurance_service, rsa, "Данные пользователя", "http")
+Rel(rsa, insurance_service, "КБМ", "http")
+
+SHOW_LEGEND()
+@enduml

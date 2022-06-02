@@ -1,0 +1,26 @@
+@startuml c4_test
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_WITH_LEGEND()
+'SHOW_PERSON_OUTLINE()
+
+Person(user, "Пользователь", "Клиент сервиса")
+Person_Ext(agent, "Агент", "Поставщик \nпользователей")
+System(sravni, "Сравни.ру ОСАГО", "Web-сервис для агрегации полисов ОСАГО разных СК")
+'System_Ext(dadata, "Dadata", "Система унификации адресов")
+System(agents_cabinet, "Агентский кабинет", "Система для работы с агентами")
+System_Ext(partners_service, "Сервис партнеров", "Система партнера")
+System_Ext(insurance_service, "Сервис СК", "Система страховой компании")
+System_Ext(rsa, "Сервис РСА", "Российский союз автостраховщиков")
+
+Rel(user, sravni, "Покупает полис(-ы)", "browser")
+Rel(agent, agents_cabinet, "Привлекает пользователей", "browser")
+'Rel_R(sravni, dadata, "Сырые данные", "http")
+'Rel_R(dadata, sravni, "Унифицированные данные", "http")
+Rel(agents_cabinet, sravni, "Данные пользователя", "http")
+Rel(partners_service, sravni, "Данные пользователя", "http")
+Rel(sravni, insurance_service, "Данные пользователя", "http")
+Rel(insurance_service, sravni, "Полис ОСАГО", "http")
+Rel(insurance_service, rsa, "Данные пользователя", "http")
+Rel(rsa, insurance_service, "КБМ", "http")
+
+@enduml

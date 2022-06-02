@@ -1,0 +1,23 @@
+@startuml smth
+
+:Пользователь: as user
+package Аутентификация {
+    (Зарегистрироваться) as uc1
+    (Авторизоваться) as uc2
+}
+package UI {
+    (Просмотреть каталог) as uc3
+    (Выбрать товар) as uc4
+    (Быстарая покупка) as uc5
+    (Положить в корзину) as uc6
+    (Оформить корзину) as uc7
+}
+user -u-> uc1
+user -u-> uc2
+uc2 .> uc1: include
+user --> uc3
+user --> uc4
+user --> uc5
+user --> uc6
+user --> uc7
+@enduml
