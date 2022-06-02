@@ -13,7 +13,7 @@ email <.>
 |Jack |Jones
 |====
 
-image::././red.svg[]
+image::images/red.svg[]
 
 .ff
 [plantuml, puml, svg, width="20%", align="center"]
