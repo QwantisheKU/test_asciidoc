@@ -15,7 +15,7 @@ email <.>
 
 |====
 
-image::red.png[]
+image::red.svg[]
 
 
 .ff
@@ -26,30 +26,4 @@ image::red.png[]
 a --> b: ffdfffff
 a <-- b: [[https://wikipedia.com wiki]]
 @enduml
-=======
-= ffff
-
-----
-name <.>
-email <.>
-----
-<.> Имя
-<.> Почта
-
-[width="100%", options="header", cols="<,<"]
-|====
-|Имя |Почта
-|Jack |Jones
-
-
-|====
-
-.ff
-[plantuml, puml, svg, width="20%", align="center"]
-....
-@startuml
-a --> b: ffdfffff
-a <-- b: [[https://wikipedia.com wiki]]
-@enduml
->>>>>>> b3a43e2cf5e119902383d82ff5980dfe87a06254
 ....
