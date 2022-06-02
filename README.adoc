@@ -1,0 +1,25 @@
+== ffff
+----
+name <.>
+email <.>
+----
+<.> Имя
+<.> Почта
+
+[width="100%", options="header", cols="<,<"]
+|====
+|Имя |Почта
+|Jack |Jones
+
+
+|====
+
+.ff
+[plantuml, puml, svg, width="20%", align="center"]
+....
+@startuml
+a --> b: ffdfffff
+a <-- b: [[https://wikipedia.com wiki]]
+@enduml
+....
+![alternative text](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/plantuml/plantuml-server/master/src/main/webapp/resource/test2diagrams.txt)
