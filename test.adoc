@@ -13,7 +13,7 @@ email <.>
 |Jack |Jones
 |====
 
-image::red.png[]
+image::./images/red.png[]
 
 
 .ff
